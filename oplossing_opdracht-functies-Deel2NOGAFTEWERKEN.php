@@ -1,6 +1,7 @@
 <?php
 	$arrEten = array('Spaghetti', 'Frieten', 'Lasagne', 'Pizza');
 	$arrResult = array();
+	$htmlString = '<html><head><title>Dit is html</title></head><body>Inhoud</body></html>';
 
 	function drukArrayAf($array)
 	{
@@ -8,7 +9,7 @@
 
 		for ($i=0; $i < $length ; $i++) 
 		{ 
-			$arrResult[$i] = $arrNaam.'['.$i.'] '.'heeft waarde: '."'". $array[$i]."'";
+			$arrResult[$i] = '$arrEten'.'['.$i.'] '.'heeft waarde: '."'". $array[$i]."'";
 		}
 	}
 
@@ -17,8 +18,22 @@
 
 	function validateHtmlTag($html)
 	{
+		$open = '<html>';
+		$close = '</html>';
+		$isValid = FALSE;
 
+		if (strpos($html, $open)==0)
+		{
+			if (stripos($html, $close)==(strlen($html)-strlen($close))) 
+			{
+				$isValid = TRUE;
+			}
+			$isValid = FALSE;
+		}
+		return $isValid;
 	}
+
+	$htmlValid = validateHtmlTag($htmlString);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +44,11 @@
 </head>
 <body>
 	<p> 
-		<?php drukArrayAf($arrEten); ?>
+		<?php  foreach ($arrResult as $key => $value) 
+		{
+			echo $value;
+		}?>
 	</p>
+	<p> Is de html-tag correct aanwezig? <?php echo $htmlValid; ?> </p>
 </body>
 </html>

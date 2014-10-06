@@ -6,10 +6,14 @@
 	$arrResults = array();
 	$counter = 0;
 
+	$arrWinst = array();
+	$counter2 = 1;
+
 	function berekenGeld($initJaar, $initGeld, $initRente)
 	{
 		global $arrResults;
 		global $counter;
+		global $arrWinst;
 
 		if ($initJaar==0) 
 		{
@@ -17,14 +21,20 @@
 		}
 		else
 		{
+			
 			--$initJaar;
 			$initGeld+=($initRente*$initGeld);
-			$arrResults[$counter] = $initGeld + berekenGeld($initJaar, $initGeld, $initRente);
+			
+			$arrResults[$counter] = floor($initGeld + berekenGeld($initJaar, $initGeld, $initRente));
+			$arrWinst[$counter] = floor(($initRente*$initGeld));
 			++$counter;
 		}
 	}
 
 	berekenGeld($jaar, $geld, $rente);
+	//$arrResultsReverse = array_reverse($arrResults);
+	//$arrWinstReverse = array_reverse($)
+
 	
 
 ?>
@@ -38,6 +48,14 @@
 <body>
 	<pre>
 		<?php var_dump($arrResults); ?>
+		<?php var_dump($arrWinst); ?>
 	</pre>
+
+	<?php foreach ($arrResults as $key => $value) 
+	{
+		echo "Na ".$counter2." jaar, is het bedrag ".$arrResults[($jaar-1)-$key]." en is de winst ".$arrWinst[($jaar-1)-$key]."<br />";
+		++$counter2;
+	}
+	?>
 </body>
 </html>

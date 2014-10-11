@@ -12,7 +12,7 @@
 		{ 
 			$winst = $initBedrag*$initRente;
 			$initBedrag += ($initBedrag*$initRente);
-			$arrString[$i] = "Na ".$i." jaar is het bedrag ".floor($initBedrag)." en de winst ".floor($winst); 
+			$arrString[$i] = "Na ".$i." jaar is het bedrag ".floor($initBedrag)." en de winst voor dat jaar is ".floor($winst); 
 		}
 
 		return $arrString;

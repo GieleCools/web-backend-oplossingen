@@ -5,10 +5,14 @@ body{
 div{
 
 	background-color: #BFBFBF;
-	width = 400px;
+	width : 350px;
+	float: left;
+	border: 1px solid black;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 5px;
 }
 
 img{
-
-	width = 300px;
+	width : 100%;
 }

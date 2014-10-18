@@ -1,0 +1,27 @@
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    margin: 10px;
+}
+
+input {
+  display: inline-block;
+  float: left;
+  margin: 10px;
+}
+
+#submitbutton{
+	float: left;
+ 	clear: both;
+ 	margin-left: 100px;
+}
+
+.focusInput{
+	
+	outline: none;
+  border: 1px solid red;
+	box-shadow: 0 0 5px red;
+}

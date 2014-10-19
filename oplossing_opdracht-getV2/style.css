@@ -1,0 +1,32 @@
+body{
+	font-family: "Calibri", sans-serif;
+}
+
+img{
+	width : 100%;
+}
+
+.individueelArtikel{
+	width: 90%;
+	background-color: transparent;
+	border: none;
+}
+
+.individueelArtikel>img{
+	width: 40%;
+	float: right;
+}
+
+.verbergArtikel{
+	display: none;
+}
+.meerdereArtikels{
+	display: block;
+	background-color: #BFBFBF;
+	width : 350px;
+	float: left;
+	border: 1px solid black;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 5px;
+}

@@ -8,7 +8,8 @@
 		$_SESSION['gegevens']['adres']['gemeente'] = $_POST['gemeente'];
 		$_SESSION['gegevens']['adres']['postcode'] = $_POST['postcode'];
 	}
-	
+	$registratie = $_SESSION['gegevens']['registratie'];
+	$adres = $_SESSION['gegevens']['adres'];
 	var_dump($_SESSION);
 	var_dump($_POST);
 
@@ -24,16 +25,19 @@
 <body>
 	<ul>	
 
-		<?php foreach ($_SESSION['gegevens']['registratie'] as $key => $value): ?> 
+		<?php foreach ($registratie as $key => $value): ?> <!--sessie in variabele steken zodat deze blok code nog werkt indien men bv niet meer gebruik maakt van een sessie, maar de info op een andere manier opslaat dus een foreach voor $registratie, en niet meer voor $_SESSION['gegevens']['registratie'] -->
 			<li>
-				<?= $key.': '.$value; ?>
+				<!--<?= $key.': '.$value; ?> Html en php gescheiden houden: eerst key echo'en, dan dubbelpunt in html, daarna value echo'en-->
+				<?= $key; ?>: <?= $value; ?>
+			
 				<a href="oplossing_opdracht-session-registratie.php?focus=<?= $key ?>">| Wijzig</a>
 			</li>
 			
 		<?php endforeach ?>
-		<?php foreach ($_SESSION['gegevens']['adres'] as $key => $value): ?> 
+		<?php foreach ($adres as $key => $value): ?> 
 			<li>
-				<?= $key.': '. $value; ?>
+				<!-- <?= $key.': '. $value; ?> -->
+				<?= $key; ?>: <?= $value; ?>
 				<a href="oplossing_opdracht-session-adresgegevens.php?focus=<?= $key ?>">| Wijzig</a>	
 			</li>
 			

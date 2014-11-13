@@ -1,0 +1,13 @@
+		<?php foreach ($artikels as $key => $value): ?> 
+			<section>
+				<article>
+					<h1><?= $value['titel'] ?></h1>
+					<p><?= $value['text'] ?></p>
+					<p>
+						Kernwoorden:
+						<?= implode(', ', $value['tags']); ?> 
+						<!-- Verschillende tags id array opsommen en van elkaar scheiden met een komma -->
+					</p>
+				</article>
+			</section>
+		<?php endforeach; ?>

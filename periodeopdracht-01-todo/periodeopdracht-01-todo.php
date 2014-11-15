@@ -61,17 +61,21 @@
 		unset($_SESSION['todoItems'][$_POST['deleteTodo']]);
 	}
 	
-	foreach ($_SESSION['todoItems'] as $key => $statusArray) 
+	if (isset($_SESSION['todoItems'])) 
 	{
-		if (in_array('todo', $statusArray)) 
+		foreach ($_SESSION['todoItems'] as $key => $statusArray) 
 		{
-			$_SESSION['countTodos']++;
-		}
-		if (in_array('done', $statusArray)) 
-		{
-			$_SESSION['countDones']++;
+			if (in_array('todo', $statusArray)) 
+			{
+				$_SESSION['countTodos']++;
+			}
+			if (in_array('done', $statusArray)) 
+			{
+				$_SESSION['countDones']++;
+			}
 		}
 	}
+
 
 	if ($_SESSION['countTodos'] > 0) 
 	{

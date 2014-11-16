@@ -1,7 +1,6 @@
 <?php
 	session_start();
 
-	$textTodo = '';
 	$errorMessage = 'Ahh, damn. Lege todos zijn niet toegestaan...';
 	$emptyInput = FALSE;
 	$emptyTodo = FALSE;

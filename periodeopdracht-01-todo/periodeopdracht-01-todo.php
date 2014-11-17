@@ -170,7 +170,6 @@
 			<br/>
 			<input type="submit" name="submitTodo" value="Toevoegen" >
 		</form>
-		<p class="copy">&copy; Giele Cools</p>
 	</div>
 </body>
 </html>

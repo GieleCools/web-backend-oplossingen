@@ -20,13 +20,13 @@
 	
 	if (isset($_POST['submitTodo']))
 	{
-		if (isset($_POST['inputTodo']) && $_POST['inputTodo'] != '')
+		if (isset($_POST['inputTodo']) && trim($_POST['inputTodo']) != '') //Trim verwijderd witruimte voor en na een string --> todo's bestaande uit enkel spaties ingeven verhinderen
 		{
 			$arrStatus = array($_POST['inputTodo'] => 'todo');
 			$_SESSION['todoItems'][] = $arrStatus;						//Array in array om elk item en hun status(todo/done) te kunnen bewaren
 			$emptyInput = FALSE;
 		}
-		elseif ($_POST['inputTodo'] == '')
+		else  																//Als $_POST['inputTodo'] niet gezet is, of als de getrimde string nog steeds leeg is
 		{
 			$emptyInput = TRUE;
 		}
@@ -75,7 +75,6 @@
 		}
 	}
 
-
 	if ($_SESSION['countTodos'] > 0) 
 	{
 		$emptyTodo = FALSE;
@@ -104,64 +103,57 @@
 <body>
 	<div id="todoAppBackground"></div>
 	<div id="todoApp">
-		<p class="<?= ($emptyInput)? 'error' : '' ?>">
-			<?= ($emptyInput)? $errorMessage : '' ?>
-		</p>
+		<?php if ($emptyInput): ?>
+			<p class="error"><?= $errorMessage ?></p>
+		<?php endif ?>
 
 		<h1>Todo App</h1>
 		<?php if ($emptyTodo && $emptyDone): ?>
-			<p>Je hebt nog geen TODO's toegevoegd. Zo weinig werk of meesterplanner?</p>	
-		<?php endif ?>
+			<p>Je hebt nog geen TODO's toegevoegd. Zo weinig werk of meesterplanner?</p>
 
-		<?php if (!$emptyTodo || !$emptyDone): ?>
+		<?php else: ?>
 			<h2>Nog te doen</h2>
-		<?php endif ?>
+					
+			<?php if ($emptyTodo): ?>
+				<p>Schouderklopje, alles is gedaan!</p>
+			<?php else: ?>
+				<ul>
+					<?php foreach ($_SESSION['todoItems'] as $key => $statusArray): ?>
+						<?php foreach ($statusArray as $itemValue => $status): ?>
+							<li>
+								<?php if ($status == 'todo'): ?>
+									<form action="periodeopdracht-01-todo.php" method="post">
+										<button name="toggleTodo" value="<?= $key ?>" class="status todo"><?= $itemValue ?></button>
+										<button name="deleteTodo" value="<?= $key ?>"></button>
+									</form>
+								<?php endif ?>
+							</li>
+						<?php endforeach ?>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif ?>
 
-		<?php if ($emptyTodo && !$emptyDone): ?>
-			<p>Schouderklopje, alles is gedaan!</p>
-		<?php endif ?>
-
-		<?php if (!$emptyTodo): ?>
-			<ul>
-				<?php foreach ($_SESSION['todoItems'] as $key => $statusArray): ?>
-					<?php foreach ($statusArray as $itemValue => $status): ?>
-						<li>
-							<?php if ($status == 'todo'): ?>
-								<form action="periodeopdracht-01-todo.php" method="post">
-									<button name="toggleTodo" value="<?= $key ?>" class="status todo"><?= $itemValue ?></button>
-									<button name="deleteTodo" value="<?= $key ?>"></button>
-								</form>
-							<?php endif ?>
-						</li>
-					<?php endforeach ?>
-				<?php endforeach; ?>
-			</ul>
-		<?php endif ?>
-
-		<?php if (!$emptyTodo || !$emptyDone): ?>
 			<h2>Done and done!</h2>
-		<?php endif ?>
-
-		<?php if (!$emptyDone): ?>
-			<ul>
-				<?php foreach ($_SESSION['todoItems'] as $key => $statusArray): ?>
-					<?php foreach ($statusArray as $itemValue => $status): ?>
-						<li>
-							<?php if ($status == 'done'): ?>
-								<form action="periodeopdracht-01-todo.php" method="post">
-									<button name="toggleTodo" value="<?= $key ?>" class="status done"><?= $itemValue ?></button>
-									<button name="deleteTodo" value="<?= $key ?>"></button>
-								</form>
-							<?php endif ?>
-						</li>
-					<?php endforeach ?>
-				<?php endforeach; ?>
-			</ul>
-		<?php endif ?>
-
-		<?php if (!$emptyTodo && $emptyDone): ?>
+		
+			<?php if (!$emptyDone): ?>
+				<ul>
+					<?php foreach ($_SESSION['todoItems'] as $key => $statusArray): ?>
+						<?php foreach ($statusArray as $itemValue => $status): ?>
+							<li>
+								<?php if ($status == 'done'): ?>
+									<form action="periodeopdracht-01-todo.php" method="post">
+										<button name="toggleTodo" value="<?= $key ?>" class="status done"><?= $itemValue ?></button>
+										<button name="deleteTodo" value="<?= $key ?>"></button>
+									</form>
+								<?php endif ?>
+							</li>
+						<?php endforeach ?>
+					<?php endforeach; ?>
+				</ul>
+			<?php else: ?>
 				<p>Werk aan de winkel...</p>
-		<?php endif ?>
+			<?php endif ?>
+		<?php endif ?>		
 
 		<h1>Todo toevoegen</h1>
 		<form action="periodeopdracht-01-todo.php" method="post">

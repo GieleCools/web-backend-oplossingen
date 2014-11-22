@@ -57,7 +57,7 @@
 			</thead>
 			<tbody>
 				<?php foreach ($fetchRow as $nummer => $rijInhoud): ?> 
-					<!--<tr class="<?= (($nummer%2)==0)? 'even' : '' ?>">--> <!-- styling class aan de even rijen geven-->
+					<!--<tr class="<?= ((($nummer+1)%2)==0)? 'even' : '' ?>"> --> <!-- styling class aan de even rijen geven-->
 						<td><?= $nummer+1 ?></td>
 						<?php foreach ($rijInhoud  as $kolomInhoud): ?>
 							<td><?= $kolomInhoud ?></td>

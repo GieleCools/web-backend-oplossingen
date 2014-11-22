@@ -1,0 +1,32 @@
+body{
+	font-family: 'Calibri', sans-serif;
+}
+
+.error{
+	background-color: red;
+	border-radius: 5px;
+	color: #fff;
+	padding: 5px;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+table tr,
+table th,
+table td
+{
+	border: 1px solid black;
+	padding: 0 5px;
+}
+
+th{
+	background-color : #828282;
+}
+
+.odd{
+	background-color: #DEDEDE;
+}
+
+

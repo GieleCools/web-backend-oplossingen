@@ -50,15 +50,15 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<?php foreach ($fetchRow[0] as $kolomnaam => $value): ?> <!--de eerste rij nemen id array fetchRow, en daarvan de $keys(=kolomnamen) weergeven-->
+					<?php foreach ($fetchRow[0] as $kolomnaam => $value): ?> <!--de eerste rij nemen id array fetchRow, en daarvan de $keys(=kolomnamen) weergeven. De kolomnamen moeten hiervoor niet gekend zijn om de inhoud van de kolommen weer te kunnen geven, want het wordt automatisch overlopen-->
 							<th><?= $kolomnaam ?></th>
 					<?php endforeach ?>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ($fetchRow as $nummer => $rijInhoud): ?>
+				<?php foreach ($fetchRow as $nummer => $rijInhoud): ?> 
 					<!--<tr class="<?= (($nummer%2)==0)? 'even' : '' ?>">--> <!-- styling class aan de even rijen geven-->
-						<td><?= $nummer ?></td>
+						<td><?= $nummer+1 ?></td>
 						<?php foreach ($rijInhoud  as $kolomInhoud): ?>
 							<td><?= $kolomInhoud ?></td>
 						<?php endforeach ?>

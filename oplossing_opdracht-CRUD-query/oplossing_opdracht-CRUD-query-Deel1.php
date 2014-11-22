@@ -38,7 +38,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>oplossing opdracht-CRUD-query-Deel1</title>
-	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel="stylesheet" href="styleDeel1.css" type="text/css">
 </head>
 <body>
 	<p class="<?= ($dbConnectMessage)? 'error' : '' ?>">

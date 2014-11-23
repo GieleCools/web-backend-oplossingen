@@ -1,0 +1,48 @@
+body{
+	font-family: 'Calibri', sans-serif;
+}
+
+.success{
+	background-color: green;
+	border-radius: 5px;
+	color: #fff;
+	padding: 5px;
+}
+
+.error{
+	background-color: red;
+	border-radius: 5px;
+	color: #fff;
+	padding: 5px;
+}
+
+.message{
+	background-color: green;
+	border-radius: 5px;
+	color: #fff;
+	padding: 5px;
+}
+
+table tr,
+table th,
+table td
+{
+	border: 1px solid black;
+	padding: 0 5px;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+th{
+	background-color : #828282;
+}
+
+td{
+	background-color: #DEDEDE;
+}
+
+tr.odd>td{
+	background-color: #A6A6A6;
+}

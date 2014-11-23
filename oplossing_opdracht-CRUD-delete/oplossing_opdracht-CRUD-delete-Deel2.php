@@ -101,7 +101,8 @@
 			<tbody>
 				<?php if (isset($fetchAssoc)): ?>
 					<?php foreach ($fetchAssoc as $index => $rijInhoud): ?>
-						<tr class="<?= ((($index+1)%2!=0))? 'odd' : '' ?>">
+						<tr class="	<?= ((($index+1)%2!=0))? 'odd ' : '' ?> 
+									<?= (isset($_SESSION['deleteValue']) && $_SESSION['deleteValue']==$rijInhoud['brouwernr'])? 'selectedDelete' : '' ?>">
 							<td><?= $index+1 ?></td>
 							<?php foreach ($rijInhoud as $kolomInhoud): ?>
 								<td><?= $kolomInhoud ?></td>

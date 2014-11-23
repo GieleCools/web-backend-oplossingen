@@ -55,3 +55,7 @@ td{
 tr.odd>td{
 	background-color: #A6A6A6;
 }
+
+tr.selectedDelete>td{
+	background-color: #E06763;
+}

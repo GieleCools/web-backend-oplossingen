@@ -88,7 +88,7 @@
 								<td><?= $kolomInhoud ?></td>
 							<?php endforeach ?>
 							<td>
-								<form action="oplossing_opdracht-CRUD-delete.php" method="get">
+								<form action="oplossing_opdracht-CRUD-delete-Deel1.php" method="get">
 									<input type="image" src="icon-delete.png" name="delete" id="delete" 
 									value="<?= $fetchAssoc[$index]["brouwernr"]?>">
 								</form>

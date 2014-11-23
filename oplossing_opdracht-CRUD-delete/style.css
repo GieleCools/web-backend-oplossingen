@@ -9,18 +9,27 @@ body{
 	padding: 5px;
 }
 
-.error{
-	background-color: red;
+.error,
+.message,
+.confirm
+{
+
 	border-radius: 5px;
 	color: #fff;
 	padding: 5px;
 }
 
+.error{
+	background-color: red;
+}
+
 .message{
 	background-color: green;
-	border-radius: 5px;
-	color: #fff;
-	padding: 5px;
+}
+
+.confirm{
+	background-color: #E06763;
+	margin-bottom: 20px;
 }
 
 table tr,

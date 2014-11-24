@@ -90,7 +90,7 @@
 		<label for="omzet">Omzet</label><br/>
 		<input type="text" name="omzet" id="omzet"><br/>
 
-		<input type="submit" name="submit" id="submit">
+		<input type="submit" name="submit" id="submit" value="Verzenden">
 	</form>
 	<?php if ($insertMessage): ?>
 		<p class="message">

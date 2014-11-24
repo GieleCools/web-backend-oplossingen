@@ -1,6 +1,5 @@
 <?php
 
-	$dbConnectMessage = '';
 	$errorMessage = false;
 	$insertMessage = false;
 

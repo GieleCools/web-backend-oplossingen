@@ -85,7 +85,7 @@
 		<input type="text" name="postcode" id="postcode"><br/>
 
 		<label for="gemeente">Gemeente</label><br/>
-		<input type="text" name="gemeente" id="brouwegemeenternaam"><br/>
+		<input type="text" name="gemeente" id="gemeente"><br/>
 
 		<label for="omzet">Omzet</label><br/>
 		<input type="text" name="omzet" id="omzet"><br/>

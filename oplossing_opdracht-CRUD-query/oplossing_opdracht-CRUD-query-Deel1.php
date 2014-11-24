@@ -47,14 +47,33 @@
 
 	<?php if (!$dbConnectMessage): ?> <!-- Als het errorbericht leeg is, is het connecteren met db gelukt, en mag alles id tabel gezet worden -->
 		<table>
+			<!-- Onderstaande methode lukt alleen als er geen delete wordt uitgevoerd, want er moet hiervoor steeds een rij op index 0 zitten
 			<thead>
 				<tr>
 					<th>#</th>
-					<?php foreach ($fetchRow[0] as $kolomnaam => $value): ?> <!--de eerste rij nemen id array fetchRow, en daarvan de $keys(=kolomnamen) weergeven. De kolomnamen moeten hiervoor niet gekend zijn om de inhoud van de kolommen weer te kunnen geven, want het wordt automatisch overlopen-->
+					<?php foreach ($fetchRow[0] as $kolomnaam => $value): ?> De eerste rij nemen id array fetchRow, en daarvan de $keys(=kolomnamen) weergeven. De kolomnamen moeten hiervoor niet gekend zijn om de inhoud van de kolommen weer te kunnen geven, want het wordt automatisch overlopen.
 							<th><?= $kolomnaam ?></th>
 					<?php endforeach ?>
 				</tr>
+			</thead> -->
+
+			<!-- oplossing: hard coded -->
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>biernr (PK)</th>
+					<th>naam</th>
+					<th>brouwernr</th>
+					<th>soortnr</th>
+					<th>alcohol</th>
+					<th>brnaam</th>
+					<th>adres</th>
+					<th>postcode</th>
+					<th>gemeente</th>
+					<th>omzet</th>
+				</tr>
 			</thead>
+
 			<tbody>
 				<?php foreach ($fetchRow as $nummer => $rijInhoud): ?> 
 					<!--<tr class="<?= ((($nummer+1)%2)==0)? 'even' : '' ?>"> --> <!-- styling class aan de even rijen geven-->

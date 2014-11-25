@@ -63,14 +63,19 @@ if (isset($_GET['id']))	//isset gebruiken, anders kan er zich een fout voordoen 
 	<link href="style.css" type="text/css" rel="stylesheet"></link>
 </head>
 <body>
-		
+		<pre>
+			<?php
+				var_dump($_GET);
+				echo $individueelArtikelID;
+			?>
+		</pre>
 		<?php foreach ($artikels as $key => $value): ?>
 			<div>
 				<h2><?= $value['titel']; ?></h2>
 				<h5><?= $value['datum']; ?></h5>
 				<img src="img/<?= $value['afbeelding']; ?>" alt = "<?= $value['afbeeldingBeschrijving']; ?>">
 				<p>
-					<?php if($idIsset): ?>
+					<?php if($idIsset && $key==$individueelArtikelID): ?>
 					<?= $artikels[$individueelArtikelID]['inhoud']; ?>
 					<?php else: ?>
 					<?= substr($value['inhoud'], 0, 50).'...';?>
@@ -79,8 +84,6 @@ if (isset($_GET['id']))	//isset gebruiken, anders kan er zich een fout voordoen 
 				<a href="oplossing_opdracht-get.php?id=<?= $key ?>">Lees meer></a>
 			</div>
 		<?php endforeach ?>
-	
-
-	
+		
 </body>
 </html>

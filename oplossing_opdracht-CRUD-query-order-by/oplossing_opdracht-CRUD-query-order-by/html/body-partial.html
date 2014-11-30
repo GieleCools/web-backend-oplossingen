@@ -1,0 +1,55 @@
+<!-- <pre>
+		<?= var_dump($_SESSION); ?>
+	</pre>
+	<pre>
+		<p>Array met messages:</p>
+		<?= var_dump($messages); ?>
+	</pre>
+
+	<pre>
+		<p>Opgevraagde data uit DB:</p>
+		<?= var_dump($resultData); ?>
+	</pre> 
+	
+	<pre>
+		<p>De GET order_by:</p>
+		<?= var_dump($_GET['order_by']); ?>
+	</pre>
+
+	<pre>
+		<p>De arrExplodeGet</p>
+		<?= var_dump($arrExplodeGet); ?>
+	</pre> 
+
+	<pre>
+		<p>DE QUERY SORT</p>
+		<?= var_dump($query); ?>
+	</pre>-->
+
+	<?php if (isset($messages)): ?>
+		<p class="<?= $messages['type'] ?>">
+			<?= $messages['text'] ?>
+		</p>
+	<?php endif ?>
+	
+	<table>
+		<thead>
+			<tr>
+				<?php foreach ($resultData['columNames'] as $value): ?>
+					<!--<th class="order <?= (isset($arrExplodeGet) && $arrExplodeGet[1]=='desc')? 'descending' : 'ascending' ?>">-->
+					<th class="order">
+						<a href="oplossing_opdracht-CRUD-query-order-by.php?order_by=<?= $value ?>-<?= (isset($arrExplodeGet) && $arrExplodeGet[1] == 'desc')? 'asc' : 'desc'?>"><?= $value ?> <img src="images/icon-<?= (isset($arrExplodeGet) && $arrExplodeGet[1] == 'desc')? 'asc' : 'desc' ?>.png"/></a>
+					</th>
+				<?php endforeach ?>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($resultData['data'] as $arrData): ?>
+				<tr>
+					<?php foreach ($arrData as $value): ?>
+						<td> <?= $value ?> </td>
+					<?php endforeach ?>
+				</tr>
+			<?php endforeach ?>
+		</tbody>
+	</table>

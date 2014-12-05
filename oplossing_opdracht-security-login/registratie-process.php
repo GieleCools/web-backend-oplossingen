@@ -22,22 +22,31 @@
 	{
 		//echo "De registratieknop is ingedrukt geweest.";
 
+ 		unset($_SESSION['notification']['badConnection']); 		//unset errormessage ivm databaseconnectie, anders blijft deze id sessie staan
+ 		unset($_SESSION['notification']['emptyRandomPassword']);
+
 		validateEmail($_POST['email']);
-		if ($_SESSION['validEmail']) 
+		if ($_SESSION['validEmail'] && isset($_SESSION['data']['randomPassword'] )) //email moet geldig zijn, en randomPasswd moet gegenereerd zijn
 		{
-			$emailFound = checkEmailInDB($_SESSION['data']['email']); //email zit in sessie door de validateEmail()-functie
-			
+			checkEmailInDB($_SESSION['data']['email']); 	//email zit in sessie door de validateEmail()-functie	
+
+			if (isset($_SESSION['notification']['badConnection']) 	//als het badConnection message vd database ingesteld is, betekent dat de connectie met db mislukt is, en moet er geredirected w nr registratieform om daar errormessage te kunnen weergeven
+			&& !empty($_SESSION['notification']['badConnection'])) 	//badConnection wordt ingesteld in de checkEmailInDB(), daarom eerst email checken, en controleren of de connectie gelukt is of niet
+			{
+				header('Location: registratie-form.php');
+			}	
 		}
 		else
 		{
 			//ongeldig e-mailadres -> redirecten naar registratieform, daar wordt de foutboodschap weergegeven
+			$_SESSION['notification']['emptyRandomPassword'] = array('type' => 'error', 'message' => 'U moet eerst een paswoord laten genereren.');//er is nog geen randompassword gegenereerd
 			header('Location: registratie-form.php');
 		}
 	}
 
 	function generatePassword($lowercase, $uppercase, $numeric, $symbols, $length)
 	{
-		unset($_SESSION['notification']['badConnection']); //Sessie terug leegmaken, zodat de messages niet in de array gestapeld worden, en weggaan als het conflict opgelost is.
+		unset($_SESSION['notification']['noRandomPassword']);	//Sessie terug leegmaken, zodat de messages niet in de array blijven staan, en weggaan als het conflict opgelost is.
 
 		$alfabetLower = "abcdefghijklmnopqrstuvwxyz";
 		$alfabetUpper = strtoupper($alfabetLower);
@@ -77,7 +86,9 @@
 				$rndCharacterNr = rand(0, strlen($rndBron)-1); //-1 want random incl maximum, dus anders incl upperbound
 				$rndCharacter = $rndBron[$rndCharacterNr]; //randomindex binnen de bron toepassen op de string die op dat moment id bron zit
 				$password[$indexPassword] = $rndCharacter;
+				//unset($password); //test: mislukken van paswd forceren
 			}
+
 			if ($password) 
 			{
 				$passwordString = implode("", $password); //passwd is array, daarom omzetten naar string en dan returnen
@@ -99,6 +110,7 @@
 	function checkEmailInDB($email)
 	{
 		unset($_SESSION['notification']['emailFound']);			//unset 'emailFound' zodat het niet in de sessie blijft staan als er toch een nieuw e-mailadres ingevoerd wordt
+
  		try 
 		{
 			$dbConnection = new PDO('mysql:host=localhost;dbname=opdracht-security-login', 'root', 'admin' );
@@ -111,8 +123,8 @@
 			$returnData = $db->Query($querySELECT, array(':email' => $email));
 			if (isset($returnData['data']) && !empty($returnData['data'])) 							//e-mailadres komt al voor in db, want returnarray is geset en niet leeg--> heeft dus resultaat uit db
 			{
-				echo "<br/> RETURN DATA <br/>";
-				var_dump($returnData['data']);
+				// echo "<br/> RETURN DATA <br/>";
+				// var_dump($returnData['data']);
 				//message instellen en redirecten naar registratie-form
 				$_SESSION['notification']['emailFound'] = array('type' => 'error', 'message' => 'Het e-mailadres is reeds in gebruik.'); 
 				header('Location: registratie-form.php');
@@ -148,13 +160,13 @@
 																//test
 					$cookieValue = $email.','.$hashedAndSaltedEmail;
 					setcookie('login', $cookieValue, time()+2592000); //expiration data cookie: 30dagen
-					//header('Location: dashboard.php');
+					header('Location: dashboard.php');
 				}
 			}	
 		} 
 		catch (Exception $e) 
 		{
-			$_SESSION['checkEmailInDB'] = array('type' => 'error', 'message' => 'Er kon geen paswoord gegenereerd worden.');
+			$_SESSION['notification']['badConnection'] = array('type' => 'error', 'message' => 'Connectie met database mislukt.');
 		}
 	}
 
@@ -194,13 +206,19 @@
 	<title>Document</title>
 </head>
 <body>
-<!-- 	<pre>
+	<pre>
 		Email:
 		<?= var_dump($_SESSION['data']['email']) ?>
 	</pre>
 	<pre>
 		Random password:
 		<?= var_dump($_SESSION['data']['randomPassword']) ?>
+	</pre><!--
+	<pre>
+		<?php if (isset($_SESSION['passwdTEST'])): ?>
+			<?= var_dump($_SESSION['passwdTEST']) ?>
+		<?php endif ?>
 	</pre> -->
+
 </body>
 </html>

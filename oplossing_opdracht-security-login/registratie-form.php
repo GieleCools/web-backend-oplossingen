@@ -42,11 +42,9 @@
 	<h1>Registratie</h1>
 	<?php if (isset($arrMessages)): ?>
 		<?php foreach ($arrMessages as $category): ?>
-		
 				<p class="<?= $category['type'] ?>">
 					<?= $category['message']?>
 				</p>
-		
 		<?php endforeach ?>
 	<?php endif ?>
 	<form action="registratie-process.php" method="post">

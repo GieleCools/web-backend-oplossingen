@@ -18,22 +18,23 @@
 			$cookieData = explode(',', $_COOKIE['login']);
 			//var_dump($cookieData);
 			$emailCookie = $cookieData[0];							//!!! controleren op email uit cookie, of op email uit sessie???!!!
-			$emailSessie = $_SESSION['data']['email'];
+			//$emailUitSessie = $_SESSION['data']['email'];
 			$hashedAndSaltedEmailCookie = $cookieData[1];
 
 			$dbConnection = new PDO('mysql:host=localhost;dbname=opdracht-security-login', 'root', 'admin' );
 			$db = new Database($dbConnection);
 
-			if (isset($emailSessie) && isset($_SESSION['data']['randomPassword'])) 
+			//if (isset($emailCookie) && isset($_SESSION['data']['randomPassword'])) 
+			if (isset($emailCookie)) 
 			{
 				$querySELECTSalt = "	SELECT salt 					
 										FROM users 
 										WHERE email = :email "; //salt ophalen uit de users-tabel
 
-				$returnedUser = $db->Query($querySELECTSalt, array('email' => $emailSessie));
+				$returnedUser = $db->Query($querySELECTSalt, array('email' => $emailCookie));
 				$userSalt = $returnedUser['data'][0]['salt'];
 				//$userSalt = 123456; //test of foute salt
-				$userSaltedEmailHash = hash('sha512', $userSalt.$emailSessie); //salt uit db gehashed met het door de gebruiker ingegeven emailadres uit sessie
+				$userSaltedEmailHash = hash('sha512', $userSalt.$emailCookie); //salt uit db gehashed met het door de gebruiker ingegeven emailadres uit sessie
 				
 				if ($userSaltedEmailHash === $hashedAndSaltedEmailCookie) 
 				{
@@ -46,13 +47,12 @@
 					// echo '<br/>';
 
 					//cookie is aangemaakt, persoon is aangemeld, data mag uit de sessie, zodat deze niet terug in het registratieformulier verschijnt
-					unset($_SESSION['data']['email']);
-					unset($_SESSION['data']['randomPassword']);
+					// unset($_SESSION['data']['email']);
+					// unset($_SESSION['data']['randomPassword']);
 					// echo "DE LEGE SESSIE VAN HET EMAILADERS: <br/>"; //weergeven of de sessies werkelijk leeg zijn.
 					// var_dump($_SESSION['data']['email']);
 					// echo "<br/>DE LEGE SESSIE VAN HET RANDOM PASSWORD: <br/>";
 					// var_dump($_SESSION['data']['randomPassword']);
-
 				}
 				else
 				{
@@ -66,14 +66,15 @@
 		catch (Exception $e) 
 		{
 			$_SESSION['notification']['badConnection'] = array('type' => 'error', 'message' => 'Connectie met database mislukt.');
-			//header('Location: login-form.php');
+			header('Location: login-form.php');
 		}
 	}
 	else
 	{
 		header('Location: login-form.php');
 	}
-
+	//echo "DE LOGGED IN BOOL IS:";
+	//var_dump($loggedIn);
 ?>
 
 <!DOCTYPE html>
@@ -84,13 +85,16 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-<!-- 	<pre>
+	<!-- <pre>
 		<?= var_dump($_SESSION['data'])?>
-	</pre> -->
+	</pre>  -->
 
 	<h1>Dashboard</h1>
 	<?php if ($loggedIn): ?>
-		<a href="logout.php">Uitloggen</a>	
+		<form action="logout.php" method="post">
+			<!-- <a href="logout.php">Uitloggen</a>	 -->
+			<input type="submit" name="uitlogLink" id="uitlogLink" value="Uitloggen"> <!-- om te kunnen controleren in logout.php of er op deze link gedrukt is, of er gewoon naar de logoutpagina gesurft is -->
+		</form>
 	<?php endif ?>
 </body>
 </html>

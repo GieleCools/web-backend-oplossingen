@@ -1,19 +1,23 @@
 <?php
 	session_start();
 
+	//als de gebruiker ingelogd is, en toch naar deze pagina surft, moet die doorverwezen worden naar het dashboard
+	if (isset($_COOKIE['login']))
+	{
+		header('Location: dashboard.php');
+	}
+
+	unset($_SESSION['notification']['logout']); // nu kan je na het uitloggen toch naar registratiepagina gaan, en terug naar het inlogscherm gaan zonder dat het logout bericht er nog staat
+	unset($_SESSION['notification']['emailNotFound']);
+
 	$generatedPassword = (isset($_SESSION['data']['randomPassword']))? $_SESSION['data']['randomPassword'] : ''; 
 	$email = (isset($_SESSION['data']['email']))? $_SESSION['data']['email'] : '';
 
-	var_dump($email);
-	// $nonvalidEmail = (	isset($_SESSION['data']['email']) 
-	// 					&& isset($_SESSION['validEmail']) 
-	// 					&& !$_SESSION['validEmail'] 
-	// 					&& isset($_SESSION['notification']))? 
-	// 					TRUE : FALSE ; // email geset, en niet valid, en foutmelding -> email is niet valid
+	//var_dump($email);
 
 	$nonvalidEmail = (isset($_SESSION['validEmail']) && !$_SESSION['validEmail'])? TRUE : FALSE;
 
-	$arrMessages = (isset($_SESSION['notification']))? $_SESSION['notification'] : NULL;
+	$arrMessages = (isset($_SESSION['notification']))? $_SESSION['notification'] : FALSE;
 ?>
 
 
@@ -25,11 +29,12 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-	<pre>
+<!-- 	<pre>
 		Valid email?
 		<?=  var_dump($_SESSION['validEmail']) ?>
 	</pre> 
 	<pre>
+		arr met messages:
 		<?=  var_dump($arrMessages) ?>
 	</pre>
 
@@ -37,10 +42,10 @@
 		<?php if (isset($_SESSION['passwdTEST'])): ?>
 			<?= var_dump($_SESSION['passwdTEST']) ?>
 		<?php endif ?>
-	</pre>
+	</pre> -->
 
 	<h1>Registratie</h1>
-	<?php if (isset($arrMessages)): ?>
+	<?php if ($arrMessages): ?>
 		<?php foreach ($arrMessages as $category): ?>
 				<p class="<?= $category['type'] ?>">
 					<?= $category['message']?>

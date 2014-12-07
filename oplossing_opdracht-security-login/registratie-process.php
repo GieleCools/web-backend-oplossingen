@@ -10,9 +10,11 @@
 	
 	if (isset($_POST['generatePassword'])) 
 	{
+		unset($_SESSION['notification']['emptyRandomPassword']);
+
 		//$_SESSION['password'] = generatePassword(true, true, true, true, 14);
 		$_SESSION['data']['randomPassword'] = generatePassword(true, true, true, true, 14); //fie geeft paswoordstring terug, en wordt in sessie gestoken
-		echo generatePassword(true, true, true, true, 14); //test
+		//echo generatePassword(true, true, true, true, 14); //test
 
 		validateEmail($_POST['email']); 				//foutboodschap ad messages toevoegen indien het emailadres nog niet ingevuld is, of incorrect is terwijl het paswoord gegenereerd moet worden
 		header('Location: registratie-form.php');
@@ -39,7 +41,7 @@
 		else
 		{
 			//ongeldig e-mailadres -> redirecten naar registratieform, daar wordt de foutboodschap weergegeven
-			$_SESSION['notification']['emptyRandomPassword'] = array('type' => 'error', 'message' => 'U moet eerst een paswoord laten genereren.');//er is nog geen randompassword gegenereerd
+			$_SESSION['notification']['emptyRandomPassword'] = array('type' => 'error', 'message' => 'U moet eerst een paswoord genereren.');//er is nog geen randompassword gegenereerd
 			header('Location: registratie-form.php');
 		}
 	}
@@ -197,6 +199,12 @@
 		}
 	}
 
+	//als men rechtstreeks naar deze pag surft, dus zonder form in te vullen --> redirecten naar login form
+	if (!isset($_POST['registreer']) && !isset($_POST['generatePassword'])) 
+	{
+		header('Location: login-form.php');
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -206,14 +214,14 @@
 	<title>Document</title>
 </head>
 <body>
-	<pre>
+<!--<pre>
 		Email:
 		<?= var_dump($_SESSION['data']['email']) ?>
 	</pre>
 	<pre>
 		Random password:
 		<?= var_dump($_SESSION['data']['randomPassword']) ?>
-	</pre><!--
+	</pre>
 	<pre>
 		<?php if (isset($_SESSION['passwdTEST'])): ?>
 			<?= var_dump($_SESSION['passwdTEST']) ?>

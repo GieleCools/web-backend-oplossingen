@@ -9,6 +9,13 @@ body{
 	padding: 5px;
 }
 
+.success{
+	background-color: green;
+	border-radius: 5px;
+	color: #fff;
+	padding: 5px;
+}
+
 table{
 	border-collapse: collapse;
 }

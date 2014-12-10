@@ -6,8 +6,6 @@
 		include_once 'classes/'.$className.'.php';
 	}
 	spl_autoload_register('autoloader');
-	
-	//unset($_SESSION['notification']);
 
 	$loggedIn = FALSE;
 	$emailCookie = FALSE;

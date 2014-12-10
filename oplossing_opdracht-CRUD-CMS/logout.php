@@ -1,6 +1,8 @@
 <?php
 	session_start();
 
+	unset($_SESSION['notification']);
+
 	if (isset($_COOKIE['login'])) 
 	{
 		if (isset($_POST['uitlogLink'])) // enkel uitloggen (cookie wissen),als je ingelogd was, en als je op de uitloglink geklikt hebt

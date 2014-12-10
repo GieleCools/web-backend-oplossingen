@@ -8,7 +8,9 @@
 	}
 	spl_autoload_register('autoloader');
 
-	//unset($_SESSION['notification']); //anders staan er mss nog onnodige messages van andere pagina's 
+	unset($_SESSION['notification']['activeren']); //anders staan er mss nog onnodige messages van andere pagina's 
+	unset($_SESSION['notification']['verwijderen']);
+	unset($_SESSION['notification']['wijzigen']);
 
 	$loggedIn = FALSE;
 	$emailCookie = FALSE;

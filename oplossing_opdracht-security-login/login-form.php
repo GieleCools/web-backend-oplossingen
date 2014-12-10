@@ -1,5 +1,10 @@
 <?php
 	session_start();
+
+	unset($_SESSION['notification']['badConnectionRegistration']);
+	unset($_SESSION['notification']['emailNotFound']);
+	unset($_SESSION['notification']['emailFound']);
+
 	//als de gebruiker ingelogd is, en toch naar deze pagina surft, moet die doorverwezen worden naar het dashboard
 	if (isset($_COOKIE['login']))
 	{

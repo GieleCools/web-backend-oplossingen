@@ -24,7 +24,7 @@
 	{
 		//echo "De registratieknop is ingedrukt geweest.";
 
- 		unset($_SESSION['notification']['badConnection']); 		//unset errormessage ivm databaseconnectie, anders blijft deze id sessie staan
+ 		unset($_SESSION['notification']['badConnectionRegistration']); 		//unset errormessage ivm databaseconnectie, anders blijft deze id sessie staan
  		unset($_SESSION['notification']['emptyRandomPassword']);
 
 		validateEmail($_POST['email']);
@@ -32,8 +32,8 @@
 		{
 			checkEmailInDB($_SESSION['data']['email']); 	//email zit in sessie door de validateEmail()-functie	
 
-			if (isset($_SESSION['notification']['badConnection']) 	//als het badConnection message vd database ingesteld is, betekent dat de connectie met db mislukt is, en moet er geredirected w nr registratieform om daar errormessage te kunnen weergeven
-			&& !empty($_SESSION['notification']['badConnection'])) 	//badConnection wordt ingesteld in de checkEmailInDB(), daarom eerst email checken, en controleren of de connectie gelukt is of niet
+			if (isset($_SESSION['notification']['badConnectionRegistration']) 	//als het badConnection message vd database ingesteld is, betekent dat de connectie met db mislukt is, en moet er geredirected w nr registratieform om daar errormessage te kunnen weergeven
+			&& !empty($_SESSION['notification']['badConnectionRegistration'])) 	//badConnection wordt ingesteld in de checkEmailInDB(), daarom eerst email checken, en controleren of de connectie gelukt is of niet
 			{
 				header('Location: registratie-form.php');
 			}	
@@ -168,7 +168,7 @@
 		} 
 		catch (Exception $e) 
 		{
-			$_SESSION['notification']['badConnection'] = array('type' => 'error', 'message' => 'Connectie met database mislukt.');
+			$_SESSION['notification']['badConnectionRegistration'] = array('type' => 'error', 'message' => 'Connectie met database mislukt.');
 		}
 	}
 

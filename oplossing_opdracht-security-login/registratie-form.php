@@ -1,14 +1,15 @@
 <?php
 	session_start();
 
+	unset($_SESSION['notification']['logout']); // nu kan je na het uitloggen toch naar registratiepagina gaan, en terug naar het inlogscherm gaan zonder dat het logout bericht er nog staat
+	unset($_SESSION['notification']['emailNotFound']);
+	unset($_SESSION['notification']['badConnectionLogin']);
+
 	//als de gebruiker ingelogd is, en toch naar deze pagina surft, moet die doorverwezen worden naar het dashboard
 	if (isset($_COOKIE['login']))
 	{
 		header('Location: dashboard.php');
 	}
-
-	unset($_SESSION['notification']['logout']); // nu kan je na het uitloggen toch naar registratiepagina gaan, en terug naar het inlogscherm gaan zonder dat het logout bericht er nog staat
-	unset($_SESSION['notification']['emailNotFound']);
 
 	$generatedPassword = (isset($_SESSION['data']['randomPassword']))? $_SESSION['data']['randomPassword'] : ''; 
 	$email = (isset($_SESSION['data']['email']))? $_SESSION['data']['email'] : '';

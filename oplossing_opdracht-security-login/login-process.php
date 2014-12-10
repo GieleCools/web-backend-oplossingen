@@ -81,7 +81,7 @@
 		} 
 		catch (Exception $e) 
 		{
-			$_SESSION['notification']['badConnection'] = array('type' => 'error', 'message' => 'Connectie met database mislukt.');
+			$_SESSION['notification']['badConnectionLogin'] = array('type' => 'error', 'message' => 'Connectie met database mislukt.');
 			header('Location: login-form.php');
 		}
 	}

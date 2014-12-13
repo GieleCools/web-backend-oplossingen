@@ -1,0 +1,7 @@
+RewriteEngine On
+
+#naar original.php surfen en inhoud van redirect.php weergeven:
+#RewriteRule ^original.php$ redirect.php
+
+#original.php instellen als indexpagina van de map
+DirectoryIndex original.php

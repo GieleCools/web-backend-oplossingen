@@ -28,7 +28,7 @@
 	<title>Oplossing opdracht-regular-expressions-Deel1</title>
 </head>
 <body>
-	<pre>
+<!-- 	<pre>
 		Het resultaat:
 		<?= var_dump($resultaat) ?>
 	</pre>
@@ -39,7 +39,7 @@
 	<pre>
 		De post:
 		<?= var_dump($_POST)?>
-	</pre>
+	</pre> -->
 	<h1>RegEx tester</h1>
 	<form action="index.php" method="post">
 		<label for="regularExpression">Regular Expression:</label></br>

@@ -1,0 +1,184 @@
+body
+{
+	font-family: sans-serif;
+	color:#454545;
+	background-color: #CBCBD1;
+}
+
+ul
+{
+	list-style-type:none;
+	padding-left: 0;
+}
+
+li
+{
+	margin-bottom: 12px;
+	display:table-row;
+}
+
+[name="toggleTodo"]
+{
+	position: relative;
+	border:0;
+	background-color:transparent;
+	margin:0;
+	font-size:20px;
+	padding:0 0 0 22px;
+	cursor:pointer;
+	outline-width:0;
+}
+
+[name="toggleTodo"]::before
+{
+	content:"";
+	position:absolute;
+	top:2px;
+	left:0;
+	width:18px;
+	height:18px;
+	display:block;
+	background-color:lightgrey;
+	border-radius:100%;
+	box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.todo:hover
+{
+	text-decoration: line-through;
+}
+
+.todo:hover:before
+{
+	content:"";
+	background-color: #55F855;
+}
+
+.done
+{
+	text-decoration: line-through;
+}
+
+.done:before
+{
+	content:"";
+	background-color: #55F855;
+}
+
+.done:hover
+{
+	text-decoration: none;
+}
+
+.done:hover:before
+{
+	background-color:lightgrey;
+}
+
+[name="deleteTodo"]
+{
+	float:right;
+	position: relative;
+	border:0;
+	background-color:transparent;
+	margin:3px 0 0 6px;
+	cursor:pointer;
+	outline-width:0;
+	position:relative;
+	width:18px;
+	height:18px;
+	display:inline-block;
+	background-color:red;
+	border-radius:100%;
+	box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.08);
+	color:transparent;
+	font-size:0px;
+}
+
+[name="deleteTodo"]::before
+{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:18px;
+	line-height:18px;
+	font-size:10px;
+	font-weight:bold;
+	text-align:center;
+	content:"X";
+	color: white;
+}
+
+.error
+{
+	background-color: red;
+	padding: 10px;
+	color: white;
+	position: relative; /* om uitroepteken voor errormessage te kunnen positioneren */
+	padding-left: 30px;
+	border-radius: 5px;
+}
+
+.error::before
+{
+	content: '!';
+	font-size: 2.6em;
+	font-weight: bold;
+	position: absolute;
+	left: 7px;
+	top: -6px;
+}
+
+label[for="inputTodo"]
+{
+	width: 50%;
+}
+
+input[id="inputTodo"]
+{
+	box-sizing: border-box;
+	width: 50%;
+}
+
+input[name="submitTodo"]
+{
+	width: 100%;
+	margin-top: 10px;
+}
+
+#todoApp
+{
+	background-color: #ffdd40;
+	padding: 2% 3%;
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.75);
+}
+
+#todoApp::after
+{
+	content:'';
+	display: block;
+	line-height: 0;
+	clear: both;
+}
+
+#todoAppBackground
+{
+	width: 100%;
+	height: 62%;
+	background-color: #a40004;
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+}

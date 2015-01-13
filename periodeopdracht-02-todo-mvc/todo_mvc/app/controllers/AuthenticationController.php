@@ -12,15 +12,16 @@
 		public function postLogin()
 		{
 			//validation rules toevoegen, zodat er geen leeg inlogformulier gesubmit kan worden
-			$validationRules = array('   username' => 'required'
-										'password' => 'required|min:8'); //paswd moet minumum 8 karakters lang zijn
+			$validationRules = array(	'email' => 'required|email', 	
+										'password' => 'required|min:8'); //email is verplicht, en moet volgens emailformaat //paswd is verplicht, en minimum 8karakters lang
 
 			//The first argument passed to the make method is the data under validation. The second argument is the validation rules that should be applied to the data.
-			$validator = Validator::make(Input:all(), $validationRules);
+			$validator = Validator::make(Input::all(), $validationRules);
 
 			if ($validator->fails()) 
 			{
-				return Redirect::route('login')->withErrors($validator);; //terug naar get van login gaan, naar loginform, en de errors van de validator meegeven
+				return Redirect::to('login')->withErrors($validator); //terug naar get van login gaan, naar loginform, en de errors van de validator meegeven 
+																		//withErrors: This method will flash the error messages to the session so that they are available on the next request.
 			}
 		}
 	}

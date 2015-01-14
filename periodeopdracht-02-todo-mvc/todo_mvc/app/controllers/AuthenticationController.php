@@ -20,9 +20,29 @@
 
 			if ($validator->fails()) 
 			{
-				return Redirect::to('login')->withErrors($validator); //terug naar get van login gaan, naar loginform, en de errors van de validator meegeven 
+				return Redirect::to('login')->withErrors($validator);	//terug naar get van login gaan, naar loginform, en de errors van de validator meegeven 
 																		//withErrors: This method will flash the error messages to the session so that they are available on the next request.
 			}
+			
+
+			//inputs uit formulier halen
+			$inputEmail = Input::get('email');
+			$inputPassword = Input::get('password');
+
+			//de attempt methode zal het auth.attempt event aanroepen, en authenticatie nagaan adhv de ingegeven gegevens
+			if (Auth::attempt(array('email' => $inputEmail, 'password' => $inputPassword)))
+			{
+			    //echo "success";
+			    //redirect naar homepage
+			    return Redirect::to('/');
+			}
+			else
+			{
+				//echo "mislukt";
+				//terug naar get login gaan, en array met errormessage meegeven
+				return Redirect::to('login')->withErrors(array('Oeps, je gebruikersnaam en/of paswoord waren niet juist. Probeer opnieuw.'));	
+			}
+		
 		}
 	}
 ?>

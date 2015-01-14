@@ -12,24 +12,6 @@
 */
 
 Route::get('/', 'HomeController@getIndex');
-Route::get('/login', 'AuthenticationController@getLogin');
-Route::post('login', 'AuthenticationController@postLogin');
+Route::get('/login', 'AuthenticationController@getLogin')->before('guest'); //route enkel volgen als iemand nog niet ingelogd is
+Route::post('login', 'AuthenticationController@postLogin')->before('csrf'); //beschermen tegen cross-site request forgeries van inlogform
 
-// Route::get('/', function()
-// {
-// 	return View::make('home');
-// });
-
-
-// Route::get('users', function()
-// {
-// 	//alle rows uit de users tabel halen
-// 	$users = User::all();
-
-// 	//with --> data doorgeven aan de view, params zijn keys en values 
-//     return View::make('users')->with('users', $users);
-// });
-
-// //Route::get('users', 'UserController@getIndex');
-
-// Route::get('user/{id}', 'UserController@showProfile');

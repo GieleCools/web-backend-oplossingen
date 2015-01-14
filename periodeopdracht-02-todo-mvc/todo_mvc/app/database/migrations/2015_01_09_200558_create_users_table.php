@@ -16,7 +16,8 @@ class CreateUsersTable extends Migration {
 		{
 			   	$table->increments('id');
 		        $table->string('email')->unique();
-		        $table->string('hashed_password');
+		        $table->string('password', 100); //min 60 karakters nodig voor db field van paswd, anders werkt laravel authenticatie niet
+		        $table->rememberToken();
 		        $table->timestamps();
 		});
 	}

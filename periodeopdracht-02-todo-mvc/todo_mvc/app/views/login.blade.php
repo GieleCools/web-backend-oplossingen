@@ -1,5 +1,8 @@
 @extends ('layouts.master')
 
+{{-- 'Login' instellen als title van pagina --}}
+@section('title', 'Login')
+
 @section('content')
 
 	{{-- alle validationerrors voor alle invulvelden opvragen uit de $errors MessageBag --}}
@@ -12,7 +15,7 @@
 
 	<label for="email">e-mail:</label><br/>
 	<input type="text" name="email" id="email"><br/>
-	<label for="email">paswoord:</label><br/>
+	<label for="password">paswoord:</label><br/>
 	<input type="password" name="password" id="password"><br/>
 	<input type="submit" name="inloggen" id="inloggen" value="inloggen">
 	

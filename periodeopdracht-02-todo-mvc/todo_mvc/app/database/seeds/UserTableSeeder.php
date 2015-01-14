@@ -12,8 +12,8 @@
 			//bij Laravel geen salt nodig, want maakt gebruikt van BCrypt hash, salt is automatisch inbegrepen
 			$users = array(
 
-				array(	'email' => 'giele.cools@student.kdg.be',
-						'hashed_password' => Hash::make('root')
+				array(	'email' => 'giele@test.be',
+						'password' => Hash::make('rootroot')
 						)
 				);
 

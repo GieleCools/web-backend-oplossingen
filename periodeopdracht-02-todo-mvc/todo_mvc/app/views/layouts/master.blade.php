@@ -4,7 +4,24 @@
 		<link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
 	</head>
 	<body>
+
 		<div id="todoAppBackground"></div>
+	
+	<header>
+		<ul class="nav">
+			<!-- Bepalen welke navigatielinks getoond mogen worden voor user die ingelogd is, of voor guest-->
+			@if(Auth::check())
+				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Home") }}</li>
+				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Dashboard") }}</li>
+				<li class="">{{ HTML::linkAction('TodoController@getIndex', "Todo") }}</li>
+				<li class="">{{ HTML::linkAction('AuthenticationController@getLogout', "Log uit (" . Auth::user()->email . ")" ) }}</li>
+			@else
+				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Home") }}</li>
+				<li class="">{{ HTML::linkAction('AuthenticationController@getLogin', "Login") }}</li>
+				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Registreer") }}</li>
+			@endif
+		</ul>
+	</header>
 
 		<div id="todoApp">
 			@yield('content')

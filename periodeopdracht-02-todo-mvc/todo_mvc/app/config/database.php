@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'todo_app',
+			'database'  => 'Giele_Cools_todo_app',
 			'username'  => 'root',
 			'password'  => 'admin',
 			'charset'   => 'utf8',

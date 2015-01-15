@@ -3,6 +3,7 @@ body
 	font-family: sans-serif;
 	color:#454545;
 	background-color: #CBCBD1;
+	margin: 0;
 }
 
 ul
@@ -17,7 +18,53 @@ li
 	display:table-row;
 }
 
-[name="toggleTodo"]
+/*============================================*/
+/* NAVIGATION STYLES */
+/*============================================*/
+.nav{
+	padding-left: 0;
+	width: 100%;
+	height: 2em;
+	line-height: 2em;
+	vertical-align: middle;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #3b3c69;
+	font-weight: 200;
+}
+
+.nav>li{
+	display: inline-block;
+	font-size: 1em;
+	height: 2em;
+}
+
+.nav>li:first-child{
+	padding-left: 0;
+}
+
+.nav>li>a{
+	display: block;
+	text-decoration: none;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 100%;
+	color: #e1e2ff;
+}
+
+.nav>li>a:hover,
+.nav>li.active
+{
+	color: #fff;
+	background-color: #7073ca;
+}
+
+
+
+/*============================================*/
+/* TODO APP STYLES */
+/*============================================*/
+[name="toggleStatus"]
 {
 	position: relative;
 	border:0;
@@ -29,7 +76,7 @@ li
 	outline-width:0;
 }
 
-[name="toggleTodo"]::before
+[name="toggleStatus"]::before
 {
 	content:"";
 	position:absolute;
@@ -148,8 +195,11 @@ input[name="submitTodo"]
 
 #todoApp
 {
+	margin-top: 1em;
 	background-color: #ffdd40;
 	padding: 2% 3%;
+	max-height: 76%;
+	overflow-x: scroll;
 	position: absolute;
 	top: 50%; 
 	left: 50%;
@@ -172,6 +222,7 @@ input[name="submitTodo"]
 
 #todoAppBackground
 {
+	margin-top: 1em;
 	width: 100%;
 	height: 62%;
 	background-color: #a40004;

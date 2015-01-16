@@ -29,6 +29,9 @@ Route::post('/login', 'AuthenticationController@postLogin')->before('csrf'); 	//
 //logout
 Route::get('/logout', 'AuthenticationController@getLogout')->before('auth'); 
 
+//dashboard
+Route::get('/dashboard', 'DashboardController@getIndex')->before('auth'); 
+
 //todo app
 Route::get('/todo', 'TodoController@getIndex')->before('auth'); 				//todo list alleen weergeven voor ingelogde users
 Route::post('/todo', 'TodoController@postIndex')->before('csrf'); 				//postIndex ipv '/todo' --> bug? submit (post) naar eigen pagina werkt niet als de app in een subfolder zit

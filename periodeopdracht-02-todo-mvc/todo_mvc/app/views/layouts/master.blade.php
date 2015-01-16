@@ -12,7 +12,7 @@
 			<!-- Bepalen welke navigatielinks getoond mogen worden voor user die ingelogd is, of voor guest-->
 			@if(Auth::check())
 				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Home") }}</li>
-				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Dashboard") }}</li>
+				<li class="">{{ HTML::linkAction('DashboardController@getIndex', "Dashboard") }}</li>
 				<li class="">{{ HTML::linkAction('TodoController@getIndex', "Todo") }}</li>
 				<li class="">{{ HTML::linkAction('AuthenticationController@getLogout', "Log uit (" . Auth::user()->email . ")" ) }}</li>
 			@else

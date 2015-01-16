@@ -1,6 +1,5 @@
 @extends ('layouts.master')
 
-{{-- 'Home' instellen als title van pagina --}}
 @section('title', 'Todo App')
 
 @section('content')
@@ -8,9 +7,7 @@
 	<h1>De TODO app</h1>
 
 	@if ($itemsTodo->count() == 0  && $itemsDone->count() == 0 )
-
 		<p>Je hebt nog geen TODO's toegevoegd. {{ HTML::linkAction('TodoController@getAddItem', "Voeg item toe") }}</p>
-
 	@else
 	
 		<h2>Wat moet er allemaal gebeuren?</h2>

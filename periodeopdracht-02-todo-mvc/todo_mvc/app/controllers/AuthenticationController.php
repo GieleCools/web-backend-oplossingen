@@ -46,5 +46,15 @@
 			Auth::logout();
 			return Redirect::to('login'); 
 		}
+
+		public function getRegistration()
+		{
+			return View::make('registration');
+		}
+
+		public function postRegistration()
+		{
+			
+		}
 	}
 ?>

@@ -12,15 +12,12 @@
 */
 
 //home
-//registreer
-//login
-//logout
-//dashboard
-//todo app
-
-//home
 Route::get('/', 'HomeController@getIndex'); 				
 //Route::post('postIndex', 'HomeController@postIndex'); 						//postIndex ipv '/' --> bug? submit (post) naar eigen pagina werkt niet als de app in een subfolder zit
+
+//registratie
+Route::get('/registration', 'AuthenticationController@getRegistration')->before('guest'); 	//route-filter: route enkel volgen als iemand nog niet ingelogd is --> als je ingelogd bent, mag je nt meer naar inlogscherm k gaan
+Route::post('/registration', 'AuthenticationController@postRegistration')->before('csrf');
 
 //login
 Route::get('/login', 'AuthenticationController@getLogin')->before('guest'); 	//route-filter: route enkel volgen als iemand nog niet ingelogd is --> als je ingelogd bent, mag je nt meer naar inlogscherm k gaan

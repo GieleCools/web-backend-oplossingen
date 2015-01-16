@@ -18,7 +18,7 @@
 			@else
 				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Home") }}</li>
 				<li class="">{{ HTML::linkAction('AuthenticationController@getLogin', "Login") }}</li>
-				<li class="">{{ HTML::linkAction('HomeController@getIndex', "Registreer") }}</li>
+				<li class="">{{ HTML::linkAction('AuthenticationController@getRegistration', "Registreer") }}</li>
 			@endif
 		</ul>
 	</header>

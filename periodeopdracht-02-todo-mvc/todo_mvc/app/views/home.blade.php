@@ -8,5 +8,5 @@
 	<h1>Welkom bij mijn Todo App!</h1>
 
 	<p>Registreer je even, zodat je snel je takenlijstje kan ingeven. </p>
-	{{ HTML::linkAction('HomeController@getIndex', "Registreer") }}
+	{{ HTML::linkAction('AuthenticationController@getRegistration', "Registreer") }}
 @stop

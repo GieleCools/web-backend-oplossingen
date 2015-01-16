@@ -31,8 +31,8 @@
 			//de attempt methode zal het auth.attempt event aanroepen, en authenticatie nagaan adhv de ingegeven gegevens
 			if (Auth::attempt(array('email' => $inputEmail, 'password' => $inputPassword)))
 			{
-			    //redirect naar homepage
-			    return Redirect::to('/');
+			    //redirect naar dashboard
+			    return Redirect::to('/dashboard');
 			}
 			else
 			{
@@ -54,7 +54,42 @@
 
 		public function postRegistration()
 		{
+			//validation rules toevoegen, zodat er geen leeg inlogformulier gesubmit kan worden
+			$validationRules = array(	'email' => 'required|unique:users|email', 	
+										'password' => 'required|min:8'); //email is verplicht, moet uniek zijn, en moet volgens emailformaat //paswd is verplicht, en minimum 8karakters lang
+
+			//The first argument passed to the make method is the data under validation. The second argument is the validation rules that should be applied to the data.
+			$validator = Validator::make(Input::all(), $validationRules);
+
+			if ($validator->fails()) 
+			{
+				return Redirect::to('registration')->withErrors($validator);	//terug naar get van login gaan, naar loginform, en de errors van de validator meegeven 
+																		//withErrors: This method will flash the error messages to the session so that they are available on the next request.
+			}
 			
+			//inputs uit formulier halen
+			$inputEmail = Input::get('email');
+			$inputPassword = Input::get('password');
+			$hashedPassword = Hash::make($inputPassword);
+
+			//nieuwe gebruiker aanmaken, email en password instellen en aan db toevoegen
+			$user = new User();
+			$user->email = $inputEmail;
+			$user->password = $hashedPassword;
+			$user->save();
+
+			//geregistreerde user inloggen
+			Auth::login($user);
+
+			//checken of login gelukt is, om naar dashboard te sturen
+			if (Auth::check())
+			{
+				return Redirect::to('dashboard');
+			}
+			else
+			{
+				return Redirect::to('login');
+			}
 		}
 	}
 ?>

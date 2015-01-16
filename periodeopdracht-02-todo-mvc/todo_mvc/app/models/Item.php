@@ -14,7 +14,7 @@
 			//status vh item instellen voor item in db en opslaan in db
 			$this->done = $done;
 			$this->save();
-		}
+		}	
 	}
 
 ?>

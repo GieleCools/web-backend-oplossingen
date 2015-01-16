@@ -11,10 +11,11 @@ class TodoController extends BaseController
 		// }
 
 		//items van ingelogde user opvragen en in $items steken
-		$items = Auth::user()->items;
+		$itemsTodo = Auth::user()->items()->where('done','=', 0)->get();
+		$itemsDone = Auth::user()->items()->where('done','=', 1)->get();
 
 		//view aanmaken, en data (items) meegeven
-		return View::make('todo', array('items' => $items));
+		return View::make('todo', array('itemsTodo' => $itemsTodo, 'itemsDone' => $itemsDone));
 	}
 	
 	public function postIndex()

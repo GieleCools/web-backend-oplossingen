@@ -13,8 +13,8 @@
 	@endforeach
 
 	{{Form::open()}}
-		<label for="inputAddItem">Wat moet er gedaan worden?</label> </br>
-		<input type="text" name="inputAddItem" id="inputAddItem"> </br>
+		<label for="inputAddItem">Wat moet er gedaan worden?</label> 
+		<input type="text" name="inputAddItem" id="inputAddItem">
 		<input type="submit" name="submitAddItem" id="submitAddItem" value="Toevoegen">
 	{{Form::close()}}
 @stop

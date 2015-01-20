@@ -19,11 +19,11 @@
 	{{-- Inlogformulier aanmaken in de view --}}
 	{{Form::open()}}
 
-	<label for="email">e-mail:</label><br/>
-	<input type="text" name="email" id="email"><br/>
-	<label for="password">paswoord:</label><br/>
-	<input type="password" name="password" id="password"><br/>
-	<input type="submit" name="inloggen" id="inloggen" value="inloggen">
+	<label for="email">e-mail:</label>
+	<input type="text" name="email" id="email">
+	<label for="password">paswoord:</label>
+	<input type="password" name="password" id="password">
+	<input type="submit" name="inloggen" id="inloggen" value="Inloggen">
 	
 	{{Form::close()}}
 @stop

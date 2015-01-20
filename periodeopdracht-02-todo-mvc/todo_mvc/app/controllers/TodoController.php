@@ -85,5 +85,10 @@ class TodoController extends BaseController
 			$resultItem->delete();
 			return Redirect::to('/todo')->with('successMessage', "Het item \"". $resultItemName ."\" werd verwijderd.");
 		}
+		else
+		{
+			//Als item niet van de user is, of niet bestaat
+			return Redirect::to('/todo')->withErrors(array('Oeps, het item kon niet verwijderd worden.'));	
+		}
 	}
 }

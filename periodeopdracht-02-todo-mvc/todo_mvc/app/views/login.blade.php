@@ -5,6 +5,10 @@
 
 @section('content')
 
+	@if (Session::get('logoutSuccessMessage') != null)
+		<p class="success"> {{Session::get('logoutSuccessMessage')}}</p>
+	@endif
+
 	<h1>Inloggen</h1>
 	
 	{{-- alle validationerrors voor alle invulvelden opvragen uit de $errors MessageBag --}}

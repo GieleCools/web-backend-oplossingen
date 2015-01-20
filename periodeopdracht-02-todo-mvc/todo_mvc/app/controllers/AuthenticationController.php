@@ -32,7 +32,7 @@
 			if (Auth::attempt(array('email' => $inputEmail, 'password' => $inputPassword)))
 			{
 			    //redirect naar dashboard
-			    return Redirect::to('/dashboard');
+			    return Redirect::to('/dashboard')->with('loginSuccessMessage', 'Pfieuw, het aanmelden is goed verlopen. Welkom!');
 			}
 			else
 			{
@@ -44,7 +44,7 @@
 		public function getLogout()
 		{
 			Auth::logout();
-			return Redirect::to('login'); 
+			return Redirect::to('login')->with('logoutSuccessMessage', 'Je bent afgemeld. Tot de volgende keer!'); 
 		}
 
 		public function getRegistration()

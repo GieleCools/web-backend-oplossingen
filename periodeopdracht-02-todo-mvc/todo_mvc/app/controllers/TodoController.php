@@ -56,7 +56,7 @@ class TodoController extends BaseController
 
 		if ($validator->fails()) 
 		{
-			return Redirect::route('add')->withErrors($validator);														
+			return Redirect::to('todo/add')->withErrors($validator);														
 		}
 
 		$item = new Item;
@@ -64,7 +64,7 @@ class TodoController extends BaseController
 		$item->user_id = $userId;
 		$item->save();
 
-		return Redirect::to('/todo');
+		return Redirect::to('/todo')->with('successMessage', "Todo \"". $item->name ."\" toegevoegd.");
 	}
 
 	public function getDelete($id)
@@ -77,8 +77,11 @@ class TodoController extends BaseController
 		//als er een item bij het id gevonden wordt, en het item bij de ingelogde user hoort, dan verwijderen
 		if ($resultItem && $resultItem->user_id == $user_id) 
 		{	
+			//naam opslaan voor mee te geven met message, daarna pas verwijderen
+			$resultItemName = $resultItem->name;
+
 			$resultItem->delete();
-			return Redirect::to('/todo');
+			return Redirect::to('/todo')->with('successMessage', "Het item \"". $resultItemName ."\" werd verwijderd.");
 		}
 	}
 }

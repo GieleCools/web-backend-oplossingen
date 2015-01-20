@@ -4,6 +4,10 @@
 
 @section('content')
 
+	@if (Session::get('successMessage') != null)
+		<p class="success"> {{Session::get('successMessage')}}</p>
+	@endif
+
 	<h1>De TODO app</h1>
 
 	@if ($itemsTodo->count() == 0  && $itemsDone->count() == 0 )

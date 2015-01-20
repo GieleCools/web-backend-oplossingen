@@ -33,10 +33,12 @@ class TodoController extends BaseController
 		if ($item->user_id == $user_id) 
 		{
 			$item->toggleStatus();
+
+			$successMessage = ($item->done)? 'Alright! Dat is geschrapt.' : 'Ai ai, nog meer werk...'; 
 		}
 
 		//redirect naar todo overzicht
-		return Redirect::to('/todo');
+		return Redirect::to('/todo')->with('successMessage', $successMessage);
 	}
 
 	public function getAddItem()
